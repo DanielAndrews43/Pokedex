@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         // Search by name
         let promptName: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width / 3, height: newView.frame.height / 3))
         promptName.font = UIFont(name: "Roboto-Black", size: 32.0)
-        promptName.font = UIFont.systemFont(ofSize: 32)
+        //promptName.font = UIFont.systemFont(ofSize: 32)
         //promptName.backgroundColor = UIColor.init(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         promptName.text = "Name:"
         promptName.textAlignment = NSTextAlignment.left;
@@ -84,15 +84,21 @@ class ViewController: UIViewController {
         //let nameSearch: UITextField = UITextField
         
         // Search by name
-        let promptNumber: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        let promptNumber: UILabel = UILabel(frame: CGRect(x: 0, y: newView.frame.height / 3, width: newView.frame.width / 3, height: newView.frame.height / 3))
         promptNumber.font = UIFont(name: "Roboto-Black", size: 32.0)
         promptNumber.font = UIFont.systemFont(ofSize: 32)
         //promptName.backgroundColor = UIColor.init(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         promptNumber.text = "Number:"
         promptNumber.textAlignment = NSTextAlignment.left;
-        @@@ I can not get this text to appear under the  Name line @@@
         newView.addSubview(promptNumber)
         
+        // Random Button
+        let randomButton: UIButton = UIButton(frame: CGRect(x: 0, y: newView.frame.height * 2/3, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        randomButton.titleLabel?.text = "Feeling Lucky?"
+        randomButton.titleLabel?.textColor = UIColor.black
+        randomButton.alignmentRect(forFrame: CGRect(x: newView.frame.width / 2, y: newView.frame.height * 2 / 3, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        
+        //randomButton.font = UIFont.systemFont(ofSize: 32)
         
         return newView
     }

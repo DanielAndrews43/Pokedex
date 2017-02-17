@@ -19,6 +19,7 @@
 		3CFC6F3D1D98719100B4EBB5 /* pokeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3C1D98719100B4EBB5 /* pokeData.json */; };
 		3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */; };
 		3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */; };
+		EF302F211E56E80800E99E77 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF302F201E56E80800E99E77 /* PokemonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		3CFC6F3C1D98719100B4EBB5 /* pokeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokeData.json; sourceTree = "<group>"; };
 		3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonGenerator.swift; sourceTree = "<group>"; };
+		EF302F201E56E80800E99E77 /* PokemonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				3CFC6F3C1D98719100B4EBB5 /* pokeData.json */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
+				EF302F201E56E80800E99E77 /* PokemonViewController.swift */,
 				3CFC6F101D98716000B4EBB5 /* ViewController.swift */,
 				16B4D86F1E564E9E00C69582 /* UserData.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
@@ -279,6 +282,7 @@
 				3CFC6F111D98716000B4EBB5 /* ViewController.swift in Sources */,
 				160AD1561E565F1A009002BA /* SearchPokemon.swift in Sources */,
 				3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */,
+				EF302F211E56E80800E99E77 /* PokemonViewController.swift in Sources */,
 				3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */,
 				16B4D8701E564E9E00C69582 /* UserData.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,

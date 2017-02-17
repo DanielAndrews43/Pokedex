@@ -51,13 +51,16 @@ class Pokemon {
         self.speed = speed
         self.total = total
         self.types = types
-        self.imageUrl = "http://img.pokemondb.net/artwork/\(name.components(separatedBy: " ")[0].lowercased()).jpg"
+        self.imageUrl = "https://img.pokemondb.net/artwork/\(name.components(separatedBy: " ")[0].lowercased()).jpg"
         self.favorite = UserData.isFavorite(name: name)
     }
     
     func getImage() -> UIImage {
         let url = URL(string: imageUrl)
         let data = try? Data(contentsOf: url!)
-        return UIImage(data: data!)!
+        if (data != nil) {
+            return UIImage(data: data!)!
+        }
+        return #imageLiteral(resourceName: "whosThatPokemon")
     }
 }

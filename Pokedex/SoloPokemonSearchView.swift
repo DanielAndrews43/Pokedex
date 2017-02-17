@@ -33,6 +33,19 @@ class SoloPokemonSearchView: UIView {
         numberSubview.backgroundColor = UIColor.white
         addSubview(numberSubview)
         
+        let randomButtonSubview: UIView = UIView(frame: CGRect(x: 0, y: numberSubview.frame.maxY, width: frame.width, height: frame.height * luckyHeight))
+        let randomButton: UIButton = UIButton.init(frame: CGRect(x: frame.width * 0.12, y: randomButtonSubview.frame.height * 0.4, width: frame.width * 0.76, height: randomButtonSubview.frame.height * 0.2))
+        randomButton.backgroundColor = UIColor.cyan
+        randomButton.addTarget(self, action: #selector(randomPokemon), for: .touchUpInside)
+        randomButton.setTitle("Get them randos", for: .normal)
+        randomButton.setTitleColor(UIColor.black, for: .normal)
+        randomButtonSubview.addSubview(randomButton)
+        addSubview(randomButtonSubview)
+    }
+    
+    func randomPokemon() {
+        //Get 20 of them randos
+        NSLog("Getting 20 randos")
     }
 }
 

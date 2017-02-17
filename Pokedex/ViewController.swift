@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         let scView: UIView = UIView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: view.frame.width, height: view.frame.height * scHeight))
         let segments = ["Single", "Catagory"]
         let sc = UISegmentedControl(items: segments)
-        sc.frame = CGRect(x: ((view.frame.width - sc.frame.width) / 2), y: ((scView.frame.height - sc.frame.height) / 2), width: sc.frame.width, height: sc.frame.height)
+        sc.frame = CGRect(x: ((view.frame.width - sc.frame.width) / 2), y: ((scView.frame.height ) / 2), width: sc.frame.width, height: sc.frame.height)
         sc.selectedSegmentIndex = 0
         //sc.addTarget(self, action: "changeView", for: .valueChanged)
         scView.addSubview(sc)

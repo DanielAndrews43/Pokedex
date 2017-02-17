@@ -24,14 +24,15 @@ class UserData: NSObject {
     }
     
     static func isFavorite(name: String) -> Bool {
-        let faves: [String] = defaults.array(forKey: defaultsKeys.favorites) as! [String]
+        let faves: [String]? = defaults.array(forKey: defaultsKeys.favorites) as? [String]
         
-        for fave in faves {
-            if fave == name {
-                return true
+        if (faves != nil){
+            for fave in faves! {
+                if fave == name {
+                    return true
+                }
             }
         }
-        
         return false
     }
     

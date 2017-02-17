@@ -9,52 +9,57 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let titleViewHeight: CGFloat = 0.15
-    let scHeight: CGFloat = 0.05
-    var stackedView: UIStackView?
     
-    var soloSearchView: UIView?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
     }
+    
+    let titleViewHeight: CGFloat = 0.15
+    let soloSearchViewHeight: CGFloat = 0.25
+    let filteredSearchViewHeight: CGFloat = 0.5
+    let searchViewHeight: CGFloat = 0.1
+    
+    let paramsSubViewHeight: CGFloat = 0.5
+    let typesSubViewHeight: CGFloat = 0.5
     
     func setUI() {
-        //Set up frames stacked view
-        stackedView = UIStackView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        let stackedView = UIStackView.init(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        view.addSubview(stackedView)
         
-        //Add title view that is always on top
         let titleView: UIView = setUpTitleView(height: titleViewHeight)
-        stackedView!.addSubview(titleView)
+        stackedView.addSubview(titleView)
         
-        //Set up Segmented Control
-        let scView: UIView = UIView(frame: CGRect(x: 0, y: titleView.frame.maxY, width: view.frame.width, height: view.frame.height * scHeight))
-        let segments = ["Single", "Catagory"]
-        let sc = UISegmentedControl(items: segments)
-        sc.frame = CGRect(x: ((view.frame.width - sc.frame.width) / 2), y: ((scView.frame.height ) / 2), width: sc.frame.width, height: sc.frame.height)
-        sc.selectedSegmentIndex = 0
-        //sc.addTarget(self, action: "changeView", for: .valueChanged)
-        scView.addSubview(sc)
-        stackedView!.addSubview(scView)
+        let soloSearchView: UIView = setUpSoloSearchView(start: titleView.frame.maxY, height: soloSearchViewHeight)
+        view.addSubview(soloSearchView)
         
-        soloSearchView = SoloPokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
-        soloSearchView?.backgroundColor = UIColor.blue
-        stackedView?.addSubview(soloSearchView!)
+        let filteredSearchView: UIView = setUpfilteredSearchView(start: soloSearchView.frame.maxY, height: soloSearchViewHeight)
+        view.addSubview(filteredSearchView)
         
-        view.addSubview(stackedView!)
+        let searchView: UIView = setUpSearchView(start: filteredSearchView.frame.maxY, height: searchViewHeight)
+        view.addSubview(searchView)
+        
+        var def = 0
+var hp = 0
+var att = 0
+      for poke in PokemonGenerator.getPokemonArray() {
+          if poke.attack > att {
+              att = poke.attack
+               }
+      if poke.health > hp {
+hp = poke.health
+}
+if poke.defense > def {
+def = poke.defense
+            }
+}
+
+NSLog(String(def) + " " + String(hp) + " " + String(att))
+        
     }
     
-//    func changeView(sender: AnyObject) {
-//        if sender.selectedSegmentIndex == 0 {
-//            //remove view 2
-//            //add view 1
-//            stackedView!.addSubview(soloSearchView!)
-//        } else {
-//            //remove view 1
-//            //add view 2
-//        }
-//    }
     
     // Title Bar View
     func setUpTitleView(height: CGFloat) -> UIView {
@@ -80,6 +85,69 @@ class ViewController: UIViewController {
         return newView
     }
     
+    // Solo Search View
+    func setUpSoloSearchView(start: CGFloat, height: CGFloat) -> UIView {
+        let newView: UIView = UIView(frame: CGRect(x:0, y:start, width: view.frame.width, height: height * view.frame.height))
+        
+        // Search by name
+        let promptName: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: newView.frame.width * 0.3, height: newView.frame.height / 3))
+        promptName.font = UIFont(name: "Roboto-Black", size: 32.0)
+        promptName.font = UIFont.systemFont(ofSize: 32)
+        promptName.backgroundColor = UIColor.init(red: 245/255, green: 140/255, blue: 140/255, alpha: 1)
+        promptName.text = "Name:"
+        promptName.textAlignment = NSTextAlignment.left;
+        newView.addSubview(promptName)
+        
+        let promptName2: UILabel = UILabel(frame: CGRect(x: newView.frame.width * 0.3, y: 0, width: newView.frame.width * 0.3, height: newView.frame.height / 3))
+        promptName2.font = UIFont(name: "Roboto-Black", size: 32.0)
+        promptName2.font = UIFont.systemFont(ofSize: 32)
+        promptName2.backgroundColor = UIColor.init(red: 245/255, green: 140/255, blue: 140/255, alpha: 1)
+        promptName2.text = "Got him"
+        promptName2.textAlignment = NSTextAlignment.left;
+        newView.addSubview(promptName2)
+        
+        
+        
+        
+        // Search by name
+        let promptNumber: UILabel = UILabel(frame: CGRect(x: 0, y: newView.frame.height / 3, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        promptNumber.font = UIFont(name: "Roboto-Black", size: 32.0)
+        promptNumber.font = UIFont.systemFont(ofSize: 32)
+        promptName.backgroundColor = UIColor.init(red: 245/255, green: 140/255, blue: 140/255, alpha: 1)
+        promptNumber.text = "Number:"
+        promptNumber.textAlignment = NSTextAlignment.left;
+        newView.addSubview(promptNumber)
+        
+        
+        // Random Button
+        let randomButton: UIButton = UIButton(frame: CGRect(x: 0, y: newView.frame.height * 2/3, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        randomButton.titleLabel?.text = "Feeling Lucky?"
+        randomButton.titleLabel?.textColor = UIColor.black
+        randomButton.alignmentRect(forFrame: CGRect(x: newView.frame.width / 2, y: newView.frame.height * 2 / 3, width: newView.frame.width / 3, height: newView.frame.height / 3))
+        
+        
+        return newView
+    }
+
+    // Filtered Search View
+    func setUpfilteredSearchView(start: CGFloat, height: CGFloat) -> UIView {
+        let newView: UIView = UIView(frame: CGRect(x: 0, y: start, width: view.frame.width, height: height * view.frame.height))
+        
+        
+        return newView
+    }
+    
+    //Search Button View
+    func setUpSearchView(start: CGFloat, height: CGFloat) -> UIView {
+        let newView: UIView = UIView(frame: CGRect(x: 0, y: start, width: view.frame.width, height: height * view.frame.height))
+        
+        return newView
+    }
+    
+
+    
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

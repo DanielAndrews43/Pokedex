@@ -10,8 +10,8 @@ import UIKit
 
 class SoloPokemonSearchView: UIView {
     
-    let soloHeight: CGFloat = 0.25
-    let luckyHeight: CGFloat = 0.50
+    let soloHeight: CGFloat = 0.15
+    let luckyHeight: CGFloat = 0.70
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,40 +24,34 @@ class SoloPokemonSearchView: UIView {
     }
 
     func setLayout(frame: CGRect) {
-        let stackedView: UIStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         
-        // Search by name
-        let nameSearchView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * soloHeight), text: "Name:")
-        stackedView.addSubview(nameSearchView)
+        let nameSubview: UIView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * soloHeight), text: "Name:", isName: true)
+        nameSubview.backgroundColor = UIColor.red
+        addSubview(nameSubview)
         
-        // Search by number
-        let numberSearchView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * soloHeight), text: "Number:")
-        stackedView.addSubview(numberSearchView)
+        let numberSubview: UIView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: nameSubview.frame.maxY, width: frame.width, height: frame.height * soloHeight), text: "Number:", isName: false)
+        numberSubview.backgroundColor = UIColor.white
+        addSubview(numberSubview)
         
-        // Random Button
-        let randomButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * luckyHeight))
-        randomButton.titleLabel?.text = "Feeling Lucky?"
-        randomButton.titleLabel?.textColor = UIColor.black
-        stackedView.addSubview(randomButton)
-        
-        addSubview(stackedView)
     }
 }
 
 class SingleSearchHorizontalView: UIView {
     
-    init(frame: CGRect, text: String) {
+    var nameField: UITextField!
+    var numberField: UITextField!
+    
+    init(frame: CGRect, text: String, isName: Bool) {
         super.init(frame: frame)
         
-        setLayout(text: text, frame: frame)
+        setLayout(text: text, frame: frame, isName: isName)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout(text: String, frame: CGRect) {
-        let stackedView: UIStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+    func setLayout(text: String, frame: CGRect, isName: Bool) {
         
         let labelWidth: CGFloat = 0.3
         let boxWidth: CGFloat = 0.5
@@ -66,19 +60,44 @@ class SingleSearchHorizontalView: UIView {
         //Add label
         let nameLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width * labelWidth, height: frame.height))
         nameLabel.font = UIFont(name: "Roboto-Black", size: 15.0)
-        nameLabel.font = UIFont.systemFont(ofSize: 15)
+        nameLabel.font = UIFont.systemFont(ofSize: 26)
         nameLabel.text = text
-        nameLabel.textAlignment = NSTextAlignment.left;
-        stackedView.addSubview(nameLabel)
+        nameLabel.textAlignment = NSTextAlignment.right
+        addSubview(nameLabel)
         
         //Add Search Bar
-        let searchBar: UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: frame.width * boxWidth, height: frame.height))
-        stackedView.addSubview(searchBar)
+        let searchView: UIView = UIView(frame: CGRect(x: nameLabel.frame.maxX, y: 0, width: frame.width * boxWidth, height: frame.height))
+        let searchBar: UITextField = UITextField(frame: CGRect(x: searchView.frame.width * 0.05, y: searchView.frame.height * 0.25, width: searchView.frame.width * 0.9, height: frame.height * 0.5))
+        if isName{
+            nameField = searchBar
+        } else {
+            numberField = searchBar
+        }
+        searchBar.borderStyle = UITextBorderStyle.line
+        searchBar.backgroundColor = UIColor.purple
+        searchView.addSubview(searchBar)
+        addSubview(searchView)
         
         //Add submit button
-        let submitButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: frame.width * buttonWidth, height: frame.height))
-        stackedView.addSubview(submitButton)
-        addSubview(stackedView)
+        let buttonView: UIView = UIView(frame: CGRect(x: searchView.frame.maxX, y: 0, width: frame.width * buttonWidth, height: frame.height))
+        let submitButton: UIButton = UIButton.init(frame: CGRect(x: 0, y: buttonView.frame.height * 0.3, width: buttonView.frame.width * 0.8, height: buttonView.frame.height * 0.4))
+        submitButton.backgroundColor = UIColor.brown
+        if isName {
+            submitButton.addTarget(self, action: #selector(nameSearch), for: .touchUpInside)
+        } else {
+            submitButton.addTarget(self, action: #selector(numberSearch), for: .touchUpInside)
+        }
+        buttonView.addSubview(submitButton)
+        addSubview(buttonView)
+    }
+    
+    func nameSearch() {
+        //Call on name search
+        NSLog("name clicked: " + nameField.text!)
+    }
+    
+    func numberSearch() {
+        NSLog("number clicked: " + numberField.text!)
     }
 }
 

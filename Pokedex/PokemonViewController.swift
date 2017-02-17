@@ -41,9 +41,10 @@ class PokemonViewController: UIViewController {
         
 
         let specStartingHeight: CGFloat = imageView.frame.height
+        let specHeight: CGFloat = view.frame.height - specStartingHeight
         
         // Attack
-        let attackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight, width: view.frame.width, height: specStartingHeight * 1/9))
+        let attackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight, width: view.frame.width, height: specHeight * 1/10))
         attackView.font = UIFont(name: "Roboto-Black", size: 20.0)
         attackView.font = UIFont.systemFont(ofSize: 20)
         attackView.backgroundColor = UIColor.red
@@ -52,7 +53,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(attackView)
         
         // Defense
-        let defenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 10/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let defenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 1/10, width: view.frame.width, height: specHeight * 1/10))
         defenseView.font = UIFont(name: "Roboto-Black", size : 20.0)
         defenseView.font = UIFont.systemFont(ofSize: 20)
         defenseView.backgroundColor = UIColor.white
@@ -61,7 +62,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(defenseView)
 
         // Health
-        let healthView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 11/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let healthView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 2/10, width: view.frame.width, height: specHeight * 1/10))
         healthView.font = UIFont(name: "Roboto-Black", size: 20.0)
         healthView.font = UIFont.systemFont(ofSize: 20)
         healthView.backgroundColor = UIColor.red
@@ -70,7 +71,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(healthView)
         
         // Special Attack
-        let specialAttackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 12/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let specialAttackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 3/10, width: view.frame.width, height: specHeight * 1/10))
         specialAttackView.font = UIFont(name: "Roboto-Black", size: 20.0)
         specialAttackView.font = UIFont.systemFont(ofSize: 20)
         specialAttackView.backgroundColor = UIColor.white
@@ -79,7 +80,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(specialAttackView)
         
         // Special Defense
-        let specialDefenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 13/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let specialDefenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 4/10, width: view.frame.width, height: specHeight * 1/10))
         specialDefenseView.font = UIFont(name: "Roboto-Black", size: 20.0)
         specialDefenseView.font = UIFont.systemFont(ofSize: 20)
         specialDefenseView.backgroundColor = UIColor.red
@@ -88,7 +89,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(specialDefenseView)
         
         // Species
-        let speciesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 14/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let speciesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 5/10, width: view.frame.width, height: specHeight * 1/10))
         speciesView.font = UIFont(name: "Roboto-Black", size: 20.0)
         speciesView.font = UIFont.systemFont(ofSize: 20)
         speciesView.backgroundColor = UIColor.white
@@ -97,7 +98,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(speciesView)
         
         // Speed
-        let speedView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 15/9, width: view.frame.width, height: specStartingHeight * 1/11))
+        let speedView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 6/10, width: view.frame.width, height: specHeight * 1/10))
         speedView.font = UIFont(name: "Roboto-Black", size: 20.0)
         speedView.font = UIFont.systemFont(ofSize: 20)
         speedView.backgroundColor = UIColor.red
@@ -106,7 +107,7 @@ class PokemonViewController: UIViewController {
         view.addSubview(speedView)
         
         // Total
-        let totalView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 16/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let totalView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 7/10, width: view.frame.width, height: specHeight * 1/10))
         totalView.font = UIFont(name: "Roboto-Black", size: 20.0)
         totalView.font = UIFont.systemFont(ofSize: 20)
         totalView.backgroundColor = UIColor.white
@@ -120,7 +121,7 @@ class PokemonViewController: UIViewController {
             words += type + " "
         }
         // Types
-        let typesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight * 17/9, width: view.frame.width, height: specStartingHeight * 1/9))
+        let typesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 8/10, width: view.frame.width, height: specHeight * 1/10))
         typesView.font = UIFont(name: "Roboto-Black", size: 20.0)
         typesView.font = UIFont.systemFont(ofSize: 20)
         typesView.backgroundColor = UIColor.red
@@ -128,6 +129,12 @@ class PokemonViewController: UIViewController {
         typesView.textAlignment = NSTextAlignment.left;
         view.addSubview(typesView)
         
+        // Add to Favorites
+        let favButton: UIButton = UIButton(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 9/10, width: view.frame.width / 2, height: specHeight * 1/10))
+        
+        
+        // Web View
+        let webButton: UIButton = UIButton(frame: CGRect(x: view.frame.width / 2, y: specStartingHeight + specHeight * 9/10, width: view.frame.width, height: specHeight * 1/10))
     }
     
     

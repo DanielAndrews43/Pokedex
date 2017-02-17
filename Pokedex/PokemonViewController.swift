@@ -9,20 +9,22 @@
 import UIKit
 
 class PokemonViewController: UIViewController {
-
-    //@IBOutlet weak var pokePhoto: UIImageView!
+    
+    var pokemonForFavs: Pokemon!
     
     
     override func awakeFromNib() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.red
+        //view.backgroundColor = UIColor.red
+        
+        
         
         //let number: Int = 13
         let name: String = "Pikachu"
         
         // pokemon will be found based on if a name or number are passed in
-        
         let pokemon: Pokemon = SearchPokemon.findPokemon(name: name)!
+        self.pokemonForFavs = pokemon
         setUI(pokemon: pokemon)
         
     }
@@ -130,13 +132,21 @@ class PokemonViewController: UIViewController {
         view.addSubview(typesView)
         
         // Add to Favorites
-        let favButton: UIButton = UIButton(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 9/10, width: view.frame.width / 2, height: specHeight * 1/10))
-        
+        let favButton: UIButton = UIButton.init(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 9/10, width: view.frame.width / 2, height: specHeight * 1/10))
+
+        favButton.backgroundColor = UIColor.cyan
+        favButton.addTarget(self, action: #selector(favPokemon), for: .touchUpInside)
+        favButton.setTitle("Add Favorite", for: .normal)
+        favButton.setTitleColor(UIColor.black, for: .normal)
+        view.addSubview(favButton)
         
         // Web View
         let webButton: UIButton = UIButton(frame: CGRect(x: view.frame.width / 2, y: specStartingHeight + specHeight * 9/10, width: view.frame.width, height: specHeight * 1/10))
     }
     
+    func favPokemon() {
+        UserData.addToFavorites(name: pokemonForFavs.name)
+    }
     
     // Load all data for Pokemon page
     func load(number: Int) {
@@ -158,48 +168,6 @@ class PokemonViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-class pokeSpecs: UIView {
-    
-    var attack: String!
-    var defense: String!
-    var hitpoints: String!
-    var specialAttack: String!
-    var specialDefense: String!
-    var species: String!
-    var speed: String!
-    var total: String!
-    var type: String!
-    
-    
-    init(frame: CGRect, attack: String, defense: String, hitpoints: String, specialAttack: String, specialDefense: String, species: String, speed: String, total: String, type: String) {
-        super.init(frame: frame)
-        self.attack = attack
-        self.defense = defense
-        self.hitpoints = hitpoints
-        self.specialAttack = specialAttack
-        self.specialDefense = specialDefense
-        self.species = species
-        self.speed = speed
-        self.total = total
-        self.type = type
-        self.backgroundColor = UIColor.red 
-        setLayout()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setLayout() {
-        //let pictureView
-        
-        
-    }
-    
-    
-}
     
 
     /*

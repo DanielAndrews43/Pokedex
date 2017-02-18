@@ -17,10 +17,16 @@ class UserData: NSObject {
     }
     
     static func addToFavorites (name: String) {
-        var faves: [String] = defaults.array(forKey: defaultsKeys.favorites) as! [String]
-        faves.append(name)
+        var faves: [String]? = defaults.array(forKey: defaultsKeys.favorites) as! [String]?
         
-        defaults.setValue(faves, forKey: defaultsKeys.favorites)
+        if faves != nil {
+            if (!isFavorite(name: name)) {
+                faves!.append(name)
+            }
+            defaults.setValue(faves, forKey: defaultsKeys.favorites)
+        }
+        defaults.setValue([name], forKey: defaultsKeys.favorites)
+
     }
     
     static func isFavorite(name: String) -> Bool {

@@ -23,6 +23,8 @@
 		3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */; };
 		3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */; };
 		EF302F211E56E80800E99E77 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF302F201E56E80800E99E77 /* PokemonViewController.swift */; };
+		EF3835AF1E5908B4003614FF /* PokemonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3835AE1E5908B4003614FF /* PokemonCollectionViewCell.swift */; };
+		EF3835B11E591F21003614FF /* PokemonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3835B01E591F21003614FF /* PokemonTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonGenerator.swift; sourceTree = "<group>"; };
 		EF302F201E56E80800E99E77 /* PokemonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
+		EF3835AE1E5908B4003614FF /* PokemonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonCollectionViewCell.swift; sourceTree = "<group>"; };
+		EF3835B01E591F21003614FF /* PokemonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,19 +121,21 @@
 			children = (
 				3CFC6F3C1D98719100B4EBB5 /* pokeData.json */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
-				EF302F201E56E80800E99E77 /* PokemonViewController.swift */,
 				16B4D86F1E564E9E00C69582 /* UserData.swift */,
 				160AD1551E565F1A009002BA /* SearchPokemon.swift */,
 				3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */,
+				16F85F6B1E5745D8009E29FC /* ResultsViewController.swift */,
+				EF3835AE1E5908B4003614FF /* PokemonCollectionViewCell.swift */,
+				EF3835B01E591F21003614FF /* PokemonTableViewCell.swift */,
 				3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
 				3CFC6F151D98716000B4EBB5 /* Assets.xcassets */,
 				3CFC6F171D98716000B4EBB5 /* LaunchScreen.storyboard */,
 				3CFC6F1A1D98716000B4EBB5 /* Info.plist */,
 				16F85F671E57395F009E29FC /* MultiplePokemonSearchView.swift */,
+				EF302F201E56E80800E99E77 /* PokemonViewController.swift */,
 				3CFC6F101D98716000B4EBB5 /* ViewController.swift */,
 				16F85F681E57395F009E29FC /* SoloPokemonSearchView.swift */,
-				16F85F6B1E5745D8009E29FC /* ResultsViewController.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -291,11 +297,13 @@
 				16F85F691E57395F009E29FC /* MultiplePokemonSearchView.swift in Sources */,
 				3CFC6F111D98716000B4EBB5 /* ViewController.swift in Sources */,
 				160AD1561E565F1A009002BA /* SearchPokemon.swift in Sources */,
+				EF3835AF1E5908B4003614FF /* PokemonCollectionViewCell.swift in Sources */,
 				16F85F6C1E5745D8009E29FC /* ResultsViewController.swift in Sources */,
 				3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */,
 				16F85F6A1E57395F009E29FC /* SoloPokemonSearchView.swift in Sources */,
 				EF302F211E56E80800E99E77 /* PokemonViewController.swift in Sources */,
 				3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */,
+				EF3835B11E591F21003614FF /* PokemonTableViewCell.swift in Sources */,
 				16B4D8701E564E9E00C69582 /* UserData.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,
 			);

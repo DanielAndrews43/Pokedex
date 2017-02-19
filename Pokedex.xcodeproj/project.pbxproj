@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		160AD1561E565F1A009002BA /* SearchPokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160AD1551E565F1A009002BA /* SearchPokemon.swift */; };
+		1662097E1E5921C500C1866C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1662097D1E5921C500C1866C /* WebViewController.swift */; };
 		16B4D8701E564E9E00C69582 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B4D86F1E564E9E00C69582 /* UserData.swift */; };
 		16F85F691E57395F009E29FC /* MultiplePokemonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F85F671E57395F009E29FC /* MultiplePokemonSearchView.swift */; };
 		16F85F6A1E57395F009E29FC /* SoloPokemonSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F85F681E57395F009E29FC /* SoloPokemonSearchView.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		160AD1551E565F1A009002BA /* SearchPokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPokemon.swift; sourceTree = "<group>"; };
+		1662097D1E5921C500C1866C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		16B4D86F1E564E9E00C69582 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		16F85F671E57395F009E29FC /* MultiplePokemonSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePokemonSearchView.swift; sourceTree = "<group>"; };
 		16F85F681E57395F009E29FC /* SoloPokemonSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoloPokemonSearchView.swift; sourceTree = "<group>"; };
@@ -117,19 +119,20 @@
 			children = (
 				3CFC6F3C1D98719100B4EBB5 /* pokeData.json */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
-				EF302F201E56E80800E99E77 /* PokemonViewController.swift */,
 				16B4D86F1E564E9E00C69582 /* UserData.swift */,
 				160AD1551E565F1A009002BA /* SearchPokemon.swift */,
 				3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */,
 				3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */,
+				16F85F6B1E5745D8009E29FC /* ResultsViewController.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
 				3CFC6F151D98716000B4EBB5 /* Assets.xcassets */,
 				3CFC6F171D98716000B4EBB5 /* LaunchScreen.storyboard */,
 				3CFC6F1A1D98716000B4EBB5 /* Info.plist */,
 				16F85F671E57395F009E29FC /* MultiplePokemonSearchView.swift */,
+				EF302F201E56E80800E99E77 /* PokemonViewController.swift */,
 				3CFC6F101D98716000B4EBB5 /* ViewController.swift */,
 				16F85F681E57395F009E29FC /* SoloPokemonSearchView.swift */,
-				16F85F6B1E5745D8009E29FC /* ResultsViewController.swift */,
+				1662097D1E5921C500C1866C /* WebViewController.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F85F691E57395F009E29FC /* MultiplePokemonSearchView.swift in Sources */,
+				1662097E1E5921C500C1866C /* WebViewController.swift in Sources */,
 				3CFC6F111D98716000B4EBB5 /* ViewController.swift in Sources */,
 				160AD1561E565F1A009002BA /* SearchPokemon.swift in Sources */,
 				16F85F6C1E5745D8009E29FC /* ResultsViewController.swift in Sources */,

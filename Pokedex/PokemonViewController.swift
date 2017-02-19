@@ -10,7 +10,8 @@ import UIKit
 
 class PokemonViewController: UIViewController {
     
-    var pokemonForFavs: Pokemon!
+    var pokemon: Pokemon!
+    let buttonHeight: CGFloat = 0.1
     
     
     override func awakeFromNib() {
@@ -24,7 +25,7 @@ class PokemonViewController: UIViewController {
         
         // pokemon will be found based on if a name or number are passed in
         let pokemon: Pokemon = SearchPokemon.findPokemon(name: name)!
-        self.pokemonForFavs = pokemon
+        self.pokemon = pokemon
         setUI(pokemon: pokemon)
         
     }
@@ -41,98 +42,34 @@ class PokemonViewController: UIViewController {
         imageView.image = pokemon.getImage()
         view.addSubview(imageView)
         
-
-        let specStartingHeight: CGFloat = imageView.frame.height
-        let specHeight: CGFloat = view.frame.height - specStartingHeight
-        
-        // Attack
-        let attackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight, width: view.frame.width, height: specHeight * 1/10))
-        attackView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        attackView.font = UIFont.systemFont(ofSize: 20)
-        attackView.backgroundColor = UIColor.red
-        attackView.text = "Attack: " + String(pokemon.attack)
-        attackView.textAlignment = NSTextAlignment.left;
-        view.addSubview(attackView)
-        
-        // Defense
-        let defenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 1/10, width: view.frame.width, height: specHeight * 1/10))
-        defenseView.font = UIFont(name: "Roboto-Black", size : 20.0)
-        defenseView.font = UIFont.systemFont(ofSize: 20)
-        defenseView.backgroundColor = UIColor.white
-        defenseView.text = "Defense: " + String(pokemon.defense)
-        defenseView.textAlignment = NSTextAlignment.left;
-        view.addSubview(defenseView)
-
-        // Health
-        let healthView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 2/10, width: view.frame.width, height: specHeight * 1/10))
-        healthView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        healthView.font = UIFont.systemFont(ofSize: 20)
-        healthView.backgroundColor = UIColor.red
-        healthView.text = "hitpoints: " + String(pokemon.health)
-        healthView.textAlignment = NSTextAlignment.left;
-        view.addSubview(healthView)
-        
-        // Special Attack
-        let specialAttackView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 3/10, width: view.frame.width, height: specHeight * 1/10))
-        specialAttackView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        specialAttackView.font = UIFont.systemFont(ofSize: 20)
-        specialAttackView.backgroundColor = UIColor.white
-        specialAttackView.text = "Special Attack: " + String(pokemon.specialAttack)
-        specialAttackView.textAlignment = NSTextAlignment.left;
-        view.addSubview(specialAttackView)
-        
-        // Special Defense
-        let specialDefenseView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 4/10, width: view.frame.width, height: specHeight * 1/10))
-        specialDefenseView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        specialDefenseView.font = UIFont.systemFont(ofSize: 20)
-        specialDefenseView.backgroundColor = UIColor.red
-        specialDefenseView.text = "Special Defense: " + String(pokemon.specialDefense)
-        specialDefenseView.textAlignment = NSTextAlignment.left;
-        view.addSubview(specialDefenseView)
-        
-        // Species
-        let speciesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 5/10, width: view.frame.width, height: specHeight * 1/10))
-        speciesView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        speciesView.font = UIFont.systemFont(ofSize: 20)
-        speciesView.backgroundColor = UIColor.white
-        speciesView.text = "Species: " + String(pokemon.species)
-        speciesView.textAlignment = NSTextAlignment.left;
-        view.addSubview(speciesView)
-        
-        // Speed
-        let speedView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 6/10, width: view.frame.width, height: specHeight * 1/10))
-        speedView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        speedView.font = UIFont.systemFont(ofSize: 20)
-        speedView.backgroundColor = UIColor.red
-        speedView.text = "Speed: " + String(pokemon.speed)
-        speedView.textAlignment = NSTextAlignment.left;
-        view.addSubview(speedView)
-        
-        // Total
-        let totalView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 7/10, width: view.frame.width, height: specHeight * 1/10))
-        totalView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        totalView.font = UIFont.systemFont(ofSize: 20)
-        totalView.backgroundColor = UIColor.white
-        totalView.text = "Total: " + String(pokemon.total)
-        totalView.textAlignment = NSTextAlignment.left;
-        view.addSubview(totalView)
-        
-        // Decompose the array types to a string
-        var words: String = ""
+        var types: String = ""
         for type in pokemon.types {
-            words += type + " "
+            types += type + " "
         }
-        // Types
-        let typesView: UILabel = UILabel(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 8/10, width: view.frame.width, height: specHeight * 1/10))
-        typesView.font = UIFont(name: "Roboto-Black", size: 20.0)
-        typesView.font = UIFont.systemFont(ofSize: 20)
-        typesView.backgroundColor = UIColor.red
-        typesView.text = "Type: " + words
-        typesView.textAlignment = NSTextAlignment.left;
-        view.addSubview(typesView)
+        
+        let descriptions: [String] = ["Attack", "Defense", "Health", "Special Attack", "Special Defense", "Species", "Speed", "Total", "Types"]
+        let vals: [String] = [String(pokemon.attack), String(pokemon.defense), String(pokemon.health), String(pokemon.specialAttack), String(pokemon.specialDefense), String(pokemon.species), String(pokemon.speed), String(pokemon.total), types]
+        
+        var red = true
+        var count = 0
+        let specHeight = (view.frame.height - imageView.frame.height - buttonHeight * view.frame.height) / CGFloat(vals.count)
+        
+        for _ in 0..<descriptions.count {
+            var color = UIColor.white
+            if red {
+                color = UIColor.red
+            }
+            
+            let yCoord = imageView.frame.maxY + CGFloat(count) * specHeight
+            
+            let newView: UIView = InfoView(frame: CGRect(x: 0, y: yCoord, width: view.frame.width, height: specHeight), descr: descriptions[count], value: vals[count], color: color)
+            view.addSubview(newView)
+            count += 1
+            red = !red
+        }
         
         // Add to Favorites
-        let favButton: UIButton = UIButton.init(frame: CGRect(x: 0, y: specStartingHeight + specHeight * 9/10, width: view.frame.width / 2, height: specHeight * 1/10))
+        let favButton: UIButton = UIButton.init(frame: CGRect(x: 0, y: view.frame.height - buttonHeight * view.frame.height, width: view.frame.width / 2, height: view.frame.height * buttonHeight))
 
         favButton.backgroundColor = UIColor.cyan
         favButton.addTarget(self, action: #selector(favPokemon), for: .touchUpInside)
@@ -141,21 +78,23 @@ class PokemonViewController: UIViewController {
         view.addSubview(favButton)
         
         // Web View
-        let webButton: UIButton = UIButton(frame: CGRect(x: view.frame.width / 2, y: specStartingHeight + specHeight * 9/10, width: view.frame.width, height: specHeight * 1/10))
+        let webButton: UIButton = UIButton(frame: CGRect(x: favButton.frame.maxX, y: favButton.frame.minY, width: view.frame.width / 2, height: view.frame.height * buttonHeight))
+        webButton.backgroundColor = UIColor.cyan
+        favButton.addTarget(self, action: #selector(webSearch), for: .touchUpInside)
+        view.addSubview(webButton)
     }
     
     func favPokemon() {
-        UserData.addToFavorites(name: pokemonForFavs.name)
+        UserData.addToFavorites(name: self.pokemon.name)
     }
     
-    // Load all data for Pokemon page
-    func load(number: Int) {
+    func webSearch() {
         
-        
-        
-        
-        
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MagnifiedViewController
+        vc.amount = totalAmountField.text
     }
     
     override func viewDidLoad() {
@@ -168,16 +107,49 @@ class PokemonViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+class InfoView: UIView {
+    var descr: String!
+    var value: String!
+    var color: UIColor!
+    
+    init(frame: CGRect, descr: String, value: String, color: UIColor) {
+        super.init(frame: frame)
+        
+        self.descr = descr
+        self.value = value
+        self.color = color
+        
+        setLayout(frame: frame)
+    }
+    
+    func setLayout(frame: CGRect) {
+        let descrView: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width / 2, height: frame.height))
+        descrView.font = UIFont(name: "Roboto-Black", size: 18.0)
+        descrView.font = UIFont.systemFont(ofSize: 18)
+        descrView.backgroundColor = color
+        descrView.text = self.descr + ":"
+        descrView.textAlignment = NSTextAlignment.right;
+        addSubview(descrView)
+        
+        let valView: UILabel = UILabel(frame: CGRect(x: frame.width / 2, y: 0, width: frame.width / 2, height: frame.height))
+        valView.font = UIFont(name: "Roboto-Black", size: 18.0)
+        valView.font = UIFont.systemFont(ofSize: 18)
+        valView.backgroundColor = color
+        valView.text = self.value
+        valView.textAlignment = NSTextAlignment.left;
+        addSubview(valView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+
+
+
+
+

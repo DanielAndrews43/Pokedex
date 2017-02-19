@@ -14,6 +14,11 @@ class MultiplePokemonSearchView: UIView {
     let searchHeight: CGFloat = 0.15
     let types: [String] = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Normal", "Fairy", "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
     
+    var defView: SliderView!
+    var hpView: SliderView!
+    var attView: SliderView!
+    var butts: [TypeButton] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -27,12 +32,15 @@ class MultiplePokemonSearchView: UIView {
     func setLayout(frame: CGRect) {
         let defView: UIView = SliderView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * slideHeight), title: "Min Defense", type: "def")
         addSubview(defView)
+        self.defView = defView as! SliderView
         
         let hpView: UIView = SliderView(frame: CGRect(x: 0, y: defView.frame.maxY, width: frame.width, height: frame.height * slideHeight), title: "Min HP", type: "hp")
         addSubview(hpView)
+        self.hpView = hpView as! SliderView
         
         let attView: UIView = SliderView(frame: CGRect(x: 0, y: hpView.frame.maxY, width: frame.width, height: frame.height * slideHeight), title: "Min Attack", type: "att")
         addSubview(attView)
+        self.attView = attView as! SliderView
         
         
         var xCoord: CGFloat = 0
@@ -42,11 +50,41 @@ class MultiplePokemonSearchView: UIView {
         for i in 0...2 {
             xCoord = 0
             for j in 0...5 {
-                addSubview(TypeButton(frame: CGRect(x: xCoord, y: 0, width: frame.width / 6, height: buttHeight),
-                                          text: types[i*6 + j], x: xCoord, y: yCoord))
+                let newButt: TypeButton = TypeButton(frame: CGRect(x: xCoord, y: yCoord, width: frame.width / 6, height: buttHeight),
+                                                     text: types[i*6 + j], x: xCoord, y: yCoord)
+                
+                addSubview(newButt)
+                butts.append(newButt)
                 xCoord += frame.width / 6
             }
             yCoord += buttHeight
+        }
+        
+        let searchView: UIView = UIView(frame: CGRect(x: 0, y: yCoord, width: frame.width, height: frame.height * searchHeight))
+        let searchButton: UIButton = UIButton(frame: CGRect(x: searchView.frame.width / 3, y: searchView.frame.height / 3, width: searchView.frame.width / 3, height: searchView.frame.height / 3))
+        searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
+        searchButton.backgroundColor = UIColor.lightGray
+        searchButton.setTitleColor(UIColor.black, for: .normal)
+        searchButton.setTitle("Search", for: .normal)
+        searchView.addSubview(searchButton)
+        addSubview(searchView)
+    }
+    
+    func search() {
+        //Send the search request over
+        var types: [String] = []
+        
+        for butt in butts {
+            if butt.isSelected {
+                types.append(butt.title)
+            }
+        }
+        
+        NSLog(String(self.defView.slider.value))
+        NSLog(String(self.hpView.slider.value))
+        NSLog(String(self.attView.slider.value))
+        for type in types {
+            NSLog(type)
         }
     }
 }
@@ -54,17 +92,19 @@ class MultiplePokemonSearchView: UIView {
 class TypeButton: UIView {
     var title: String!
     var isSelected: Bool = false
+    var butt: UIButton!
     
     init(frame: CGRect, text: String, x: CGFloat, y: CGFloat) {
         super.init(frame: frame)
         
         self.title = text
-        
-        let butt: UIButton = UIButton(frame: CGRect(x: x, y: y, width: frame.width, height: frame.height))
+
+        let butt: UIButton = UIButton(frame: CGRect(x: 0, y:0, width: frame.width, height: frame.height))
         butt.addTarget(self, action: #selector(buttTapped), for: .touchUpInside)
         butt.backgroundColor = UIColor.cyan
         butt.setTitleColor(UIColor.black, for: .normal)
         butt.setTitle(self.title, for: .normal)
+        self.butt = butt
         addSubview(butt)
     }
     
@@ -75,6 +115,12 @@ class TypeButton: UIView {
     func buttTapped() {
         self.isSelected = !self.isSelected
         NSLog("touched: " + self.title)
+        
+        if self.isSelected {
+            self.butt.backgroundColor = UIColor.green
+        } else {
+            self.butt.backgroundColor = UIColor.cyan
+        }
     }
 }
 
@@ -82,13 +128,9 @@ class SliderView: UIView {
     var title: String!
     var type: String!
     
-    var defSlider: UISlider!
-    var hpSlider: UISlider!
-    var attSlider: UISlider!
+    var slider: UISlider!
     
-    var defSliderLabel: UILabel!
-    var hpSliderLabel: UILabel!
-    var attSliderLabel: UILabel!
+    var sliderLabel: UILabel!
     
     init(frame: CGRect, title: String, type: String) {
         super.init(frame: frame)
@@ -117,33 +159,20 @@ class SliderView: UIView {
         number.font = UIFont.systemFont(ofSize: 18)
         addSubview(number)
         
+        self.slider = slider
+        self.sliderLabel = number
+        slider.addTarget(self, action: #selector(sliderUpdate), for: .touchUpInside)
+        
         if type == "def" {
             slider.maximumValue = 230
-            defSlider = slider
-            slider.addTarget(self, action: #selector(defSliderUpdate), for: .touchUpInside)
-            defSliderLabel = number
         } else if type == "hp" {
             slider.maximumValue = 255
-            hpSlider = slider
-            slider.addTarget(self, action: #selector(hpSliderUpdate), for: .touchUpInside)
-            hpSliderLabel = number
         } else if type == "att" {
             slider.maximumValue = 190
-            attSlider = slider
-            slider.addTarget(self, action: #selector(attSliderUpdate), for: .touchUpInside)
-            attSliderLabel = number
         }
     }
     
-    func defSliderUpdate() {
-        defSliderLabel.text = String(Int(defSlider.value))
-    }
-    
-    func hpSliderUpdate() {
-        hpSliderLabel.text = String(Int(hpSlider.value))
-    }
-    
-    func attSliderUpdate() {
-        attSliderLabel.text = String(Int(attSlider.value))
+    func sliderUpdate() {
+        self.sliderLabel.text = String(Int(self.slider.value))
     }
 }

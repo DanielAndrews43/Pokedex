@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="search" id="BYZ-38-t0r" customClass="ViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,15 +22,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="Ef3-O3-FrX" kind="show" id="Epe-Jc-mMz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="201" y="114"/>
+            <point key="canvasLocation" x="-1727" y="394"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="tgf-R4-Caw">
+            <objects>
+                <tabBarController id="yez-yS-dYh" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="5O3-Eh-fzX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" id="naa-kh-bei"/>
+                        <segue destination="FX5-RA-Nwe" kind="show" id="ELr-yq-iEM"/>
+                        <segue destination="Ef3-O3-FrX" kind="show" id="idu-CY-p4U"/>
+                        <segue destination="gVn-0v-c6d" kind="show" id="kCU-Pz-Z2G"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="alD-Lb-ucc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1199" y="-376"/>
         </scene>
         <!--Pokemon View Controller-->
         <scene sceneID="11s-3q-CUC">
             <objects>
-                <viewController id="FX5-RA-Nwe" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pokemonView" id="FX5-RA-Nwe" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IYy-ka-Vb8"/>
                         <viewControllerLayoutGuide type="bottom" id="CtB-xC-C7O"/>
@@ -40,10 +63,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="gVn-0v-c6d" kind="show" id="QvN-NF-bIY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SyJ-pY-AlF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="974" y="114"/>
+            <point key="canvasLocation" x="-71" y="-83"/>
         </scene>
         <!--Results View Controller-->
         <scene sceneID="Wyv-7q-PqI">
@@ -58,10 +84,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="FX5-RA-Nwe" kind="show" id="Cz3-LV-ptP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZZ-in-zYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1825" y="114"/>
+            <point key="canvasLocation" x="-886" y="602"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="3ll-ve-zzb">
+            <objects>
+                <viewController id="gVn-0v-c6d" customClass="WebViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qyv-ge-1tX"/>
+                        <viewControllerLayoutGuide type="bottom" id="y1G-71-Pxv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jtf-tY-hDv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1l9-CA-7Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-88" y="656"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Epe-Jc-mMz"/>
+        <segue reference="Cz3-LV-ptP"/>
+        <segue reference="QvN-NF-bIY"/>
+    </inferredMetricsTieBreakers>
 </document>

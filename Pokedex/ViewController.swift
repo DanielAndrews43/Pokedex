@@ -19,6 +19,15 @@ class ViewController: UIViewController {
         setUI()
     }
     
+    static func doSegue(name: String) {
+        let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "resultsView") as! ResultsViewController
+        
+        vc.name = name
+        
+        let a = UIViewController()
+        a.performSegue(withIdentifier: "resultsView", sender: self)
+    }
+    
     func setUI() {
         //Add title view that is always on top
         let titleView: UIView = setUpTitleView(height: titleViewHeight)
@@ -42,20 +51,20 @@ class ViewController: UIViewController {
         multipleSearchView?.backgroundColor = UIColor.yellow
     }
     
-        func changeView(sender: AnyObject) {
-            NSLog("We in da haus")
-            if sender.selectedSegmentIndex == 0 {
-                NSLog("we out here")
-                if (multipleSearchView != nil) {
-                    multipleSearchView?.removeFromSuperview()
-                }
-                view.addSubview(soloSearchView!)
-            } else {
-                NSLog("Nah, we out here!")
-                soloSearchView?.removeFromSuperview()
-                view.addSubview(multipleSearchView!)
+    func changeView(sender: AnyObject) {
+        NSLog("We in da haus")
+        if sender.selectedSegmentIndex == 0 {
+            NSLog("we out here")
+            if (multipleSearchView != nil) {
+                multipleSearchView?.removeFromSuperview()
             }
+            view.addSubview(soloSearchView!)
+        } else {
+            NSLog("Nah, we out here!")
+            soloSearchView?.removeFromSuperview()
+            view.addSubview(multipleSearchView!)
         }
+    }
     
     // Title Bar View
     func setUpTitleView(height: CGFloat) -> UIView {

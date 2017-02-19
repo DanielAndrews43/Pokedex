@@ -104,6 +104,7 @@ class TypeButton: UIView {
         butt.backgroundColor = UIColor.cyan
         butt.setTitleColor(UIColor.black, for: .normal)
         butt.setTitle(self.title, for: .normal)
+        butt.titleLabel?.adjustsFontSizeToFitWidth = true
         self.butt = butt
         addSubview(butt)
     }

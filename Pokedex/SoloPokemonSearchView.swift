@@ -102,11 +102,13 @@ class SingleSearchHorizontalView: UIView {
         }
         buttonView.addSubview(submitButton)
         addSubview(buttonView)
+        
     }
     
     func nameSearch() {
         //Call on name search
         NSLog("name clicked: " + nameField.text!)
+        ViewController.doSegue(name: nameField.text!)
     }
     
     func numberSearch() {

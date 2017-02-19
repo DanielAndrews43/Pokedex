@@ -13,16 +13,63 @@ class ResultsViewController: UIViewController {
     var collectionView: UICollectionView!
     var tableView: UITableView!
     
+    var name: String?
+    var number: Int?
+    var random: Bool = false
+    
+    var minAtt: Int?
+    var minDef: Int?
+    var minHP: Int?
+    var types: [String]?
+    
+    var scHeight: CGFloat = 0.05
+    
+    var pokeRay: [Pokemon]!
+    
+    
     var images = [SearchPokemon.findPokemon(name: "Pikachu")?.getImage(), SearchPokemon.findPokemon(name: "Eevee")?.getImage(), SearchPokemon.findPokemon(name: "Squirtle")?.getImage(), SearchPokemon.findPokemon(name: "Snorlax")?.getImage(), SearchPokemon.findPokemon(name: "Ditto")?.getImage()]
     var names = [SearchPokemon.findPokemon(name: "Pikachu")?.name, SearchPokemon.findPokemon(name: "Eevee")?.name, SearchPokemon.findPokemon(name: "Squirtle")?.name, SearchPokemon.findPokemon(name: "Snorlax")?.name, SearchPokemon.findPokemon(name: "Ditto")?.name]
     
     
-    
+    func getPokemonArray() -> [Pokemon] {
+        if name != nil {
+            return [SearchPokemon.findPokemon(name: name!)!]
+        } else if number != nil {
+            return [SearchPokemon.findPokemon(number: number!)!]
+        } else if random {
+            return SearchPokemon.findRandomPokemon()
+        } else if minAtt != nil {
+            return SearchPokemon.findPokemon(minAttack: minAtt!, minDef: minDef!, minHP: minHP!, types: types!)!
+        }
+        
+        return []
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.pokeRay = getPokemonArray()
+        
         setupCollectionView()
         setupTableView()
+        
+        let scView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * scHeight))
+        let segments = ["Grid", "List"]
+        let sc = UISegmentedControl(items: segments)
+        sc.frame = CGRect(x: ((view.frame.width - sc.frame.width) / 2), y: ((scView.frame.height - sc.frame.height) / 2), width: sc.frame.width, height: sc.frame.height)
+        sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(changeView), for: .valueChanged)
+        scView.addSubview(sc)
+        view.addSubview(scView)
+    }
+    
+    func changeView(sender: AnyObject) {
+        NSLog("We in da haus")
+        if sender.selectedSegmentIndex == 0 {
+            setupCollectionView()
+        } else {
+            setupTableView()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +79,7 @@ class ResultsViewController: UIViewController {
     
     func setupTableView(){
         //Initialize TableView Object here
-        tableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY, width: view.frame.width, height: view.frame.height))
+        tableView = UITableView(frame: CGRect(x: 0, y: scHeight * view.frame.height, width: view.frame.width, height: view.frame.height))
         //Register the tableViewCell you are using
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "nameCell")
         
@@ -45,19 +92,11 @@ class ResultsViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToPokemonVC" {
-            let pokemonVC = segue.destination as! PokemonViewController
-            //This is where we pass values to PokemonViewController
-            //fruitVC.fruit = fruitToPass
-        }
-    }
-    
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x:0, y: scHeight*view.frame.height, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "pokemonCell")
         collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self
@@ -83,6 +122,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate{
         }
         
         cell.awakeFromNib()
+        cell.pokeImageView.image = images[indexPath.row]
         cell.pokeLabel.text = names[indexPath.row]
         return cell
         

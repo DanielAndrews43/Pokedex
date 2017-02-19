@@ -92,11 +92,6 @@ class PokemonViewController: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! MagnifiedViewController
-        vc.amount = totalAmountField.text
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

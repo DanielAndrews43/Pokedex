@@ -73,17 +73,18 @@ class SearchPokemon: NSObject {
         
         while pokeRay.count < 20 {
             let index = arc4random_uniform(UInt32(pokemon.count)) + 1
-            let poke = findPokemon(number: Int(index))
             
-            var isIn: Bool = false
-            for p in pokemon {
-                if p.number == poke!.number {
-                    isIn = true
+            if let poke = findPokemon(number: Int(index)) {
+                var flag = true
+                for p in pokeRay {
+                    if p.name == poke.name {
+                        flag = false
+                    }
                 }
-            }
-            
-            if !isIn {
-                pokeRay.append(poke!)
+                
+                if flag {
+                    pokeRay.append(poke)
+                }
             }
         }
         

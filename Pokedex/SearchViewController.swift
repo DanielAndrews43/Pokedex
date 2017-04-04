@@ -7,25 +7,53 @@
 //
 import UIKit
 
-class ViewController: UIViewController {
+protocol SegueHandler: class {
+    func segueToNext(identifier: String)
+}
+
+class SearchViewController: UIViewController, SegueHandler {
     let titleViewHeight: CGFloat = 0.15
     let scHeight: CGFloat = 0.05
     
-    var soloSearchView: UIView?
-    var multipleSearchView: UIView?
+    var soloSearchView: SoloPokemonSearchView!
+    var multipleSearchView: MultiplePokemonSearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
     }
     
-    static func doSegue(name: String) {
-        let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewController(withIdentifier: "resultsView") as! ResultsViewController
-        
-        vc.name = name
-        
-        let a = UIViewController()
-        a.performSegue(withIdentifier: "resultsView", sender: self)
+    func segueToNext(identifier: String) {
+        performSegue(withIdentifier: "searchToResults", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchToResults" {
+            let vc = segue.destination as! ResultsViewController
+            
+            if let name = soloSearchView.name.nameField.text {
+                vc.name = name
+            }
+            
+            if let number = soloSearchView.number.numberField.text {
+                vc.number = Int(number)
+            }
+            
+            vc.random = soloSearchView.random
+            
+            vc.minAtt = Int(multipleSearchView.attView.slider.value)
+            vc.minHP = Int(multipleSearchView.hpView.slider.value)
+            vc.minDef = Int(multipleSearchView.defView.slider.value)
+            
+            var selected: [String] = []
+            for type in multipleSearchView.butts {
+                if type.isSelected {
+                    selected.append(type.title)
+                }
+            }
+            
+            vc.types = selected
+        }
     }
     
     func setUI() {
@@ -45,10 +73,12 @@ class ViewController: UIViewController {
         
         soloSearchView = SoloPokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
         soloSearchView?.backgroundColor = UIColor.blue
+        soloSearchView.delegate = self
         view.addSubview(soloSearchView!)
         
         multipleSearchView = MultiplePokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
         multipleSearchView?.backgroundColor = UIColor.yellow
+        multipleSearchView.delegate = self
     }
     
     func changeView(sender: AnyObject) {

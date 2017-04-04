@@ -56,6 +56,7 @@ class Pokemon {
     }
     
     func getImage() -> UIImage {
+        
         let url = URL(string: imageUrl)
         let data = try? Data(contentsOf: url!)
         if (data != nil) {

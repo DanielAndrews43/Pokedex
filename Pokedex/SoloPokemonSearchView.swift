@@ -13,6 +13,13 @@ class SoloPokemonSearchView: UIView {
     let soloHeight: CGFloat = 0.15
     let luckyHeight: CGFloat = 0.70
     
+    var name: SingleSearchHorizontalView!
+    var number: SingleSearchHorizontalView!
+    
+    var delegate: SegueHandler!
+    
+    var random = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -25,12 +32,14 @@ class SoloPokemonSearchView: UIView {
 
     func setLayout(frame: CGRect) {
         
-        let nameSubview: UIView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * soloHeight), text: "Name:", isName: true)
+        let nameSubview: SingleSearchHorizontalView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height * soloHeight), text: "Name:", isName: true)
         nameSubview.backgroundColor = UIColor.red
+        name = nameSubview
         addSubview(nameSubview)
         
-        let numberSubview: UIView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: nameSubview.frame.maxY, width: frame.width, height: frame.height * soloHeight), text: "Number:", isName: false)
+        let numberSubview: SingleSearchHorizontalView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: nameSubview.frame.maxY, width: frame.width, height: frame.height * soloHeight), text: "Number:", isName: false)
         numberSubview.backgroundColor = UIColor.white
+        number = numberSubview
         addSubview(numberSubview)
         
         let randomButtonSubview: UIView = UIView(frame: CGRect(x: 0, y: numberSubview.frame.maxY, width: frame.width, height: frame.height * luckyHeight))
@@ -44,8 +53,9 @@ class SoloPokemonSearchView: UIView {
     }
     
     func randomPokemon() {
-        //Get 20 of them randos
-        NSLog("Getting 20 randos")
+        random = true
+        NSLog("random 20")
+        delegate.segueToNext(identifier: "searchToResults")
     }
 }
 
@@ -108,7 +118,7 @@ class SingleSearchHorizontalView: UIView {
     func nameSearch() {
         //Call on name search
         NSLog("name clicked: " + nameField.text!)
-        ViewController.doSegue(name: nameField.text!)
+        
     }
     
     func numberSearch() {

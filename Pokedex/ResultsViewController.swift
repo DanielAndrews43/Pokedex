@@ -26,20 +26,31 @@ class ResultsViewController: UIViewController {
     
     var pokeRay: [Pokemon]!
     
-    
-    var images = [SearchPokemon.findPokemon(name: "Pikachu")?.getImage(), SearchPokemon.findPokemon(name: "Eevee")?.getImage(), SearchPokemon.findPokemon(name: "Squirtle")?.getImage(), SearchPokemon.findPokemon(name: "Snorlax")?.getImage(), SearchPokemon.findPokemon(name: "Ditto")?.getImage()]
-    var names = [SearchPokemon.findPokemon(name: "Pikachu")?.name, SearchPokemon.findPokemon(name: "Eevee")?.name, SearchPokemon.findPokemon(name: "Squirtle")?.name, SearchPokemon.findPokemon(name: "Snorlax")?.name, SearchPokemon.findPokemon(name: "Ditto")?.name]
-    
-    
     func getPokemonArray() -> [Pokemon] {
         if name != nil {
-            return [SearchPokemon.findPokemon(name: name!)!]
-        } else if number != nil {
-            return [SearchPokemon.findPokemon(number: number!)!]
-        } else if random {
+            if let poke = SearchPokemon.findPokemon(name: name!) {
+                NSLog("using name")
+                return [poke]
+            }
+        }
+        
+        if number != nil {
+            if let poke = SearchPokemon.findPokemon(number: number!) {
+                NSLog("USing number")
+                return [poke]
+            }
+        }
+        
+        if random {
+            NSLog("using random")
             return SearchPokemon.findRandomPokemon()
-        } else if minAtt != nil {
-            return SearchPokemon.findPokemon(minAttack: minAtt!, minDef: minDef!, minHP: minHP!, types: types!)!
+        }
+        
+        if minAtt != nil {
+            if let poke = SearchPokemon.findPokemon(minAttack: minAtt!, minDef: minDef!, minHP: minHP!, types: types!) {
+                NSLog("using stats")
+                return poke
+            }
         }
         
         return []
@@ -111,7 +122,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //What do we want to return here
-        return images.count
+        return pokeRay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,13 +133,13 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate{
         }
         
         cell.awakeFromNib()
-        cell.pokeImageView.image = images[indexPath.row]
-        cell.pokeLabel.text = names[indexPath.row]
+        cell.pokeImageView.image = pokeRay[indexPath.row].getImage()
+        cell.pokeLabel.text = pokeRay[indexPath.row].name
         return cell
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // fruitToPass = images[indexPath.row]
+        NSLog("clicked a row. needs more work")
         performSegue(withIdentifier: "segueToPokemonVC", sender: self)
     }
 }
@@ -144,7 +155,7 @@ extension ResultsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     //specifying the number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return pokeRay.count
     }
     
     //Make the cell
@@ -157,7 +168,7 @@ extension ResultsViewController: UICollectionViewDelegate, UICollectionViewDataS
     //Fill in the cell with information
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pokemonCell = cell as! PokemonCollectionViewCell
-        pokemonCell.pokemonImageView.image = images[indexPath.row]
+        pokemonCell.pokemonImageView.image = pokeRay[indexPath.row].getImage()
     }
     
     //Sizes the cell

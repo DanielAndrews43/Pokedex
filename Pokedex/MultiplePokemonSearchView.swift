@@ -19,6 +19,8 @@ class MultiplePokemonSearchView: UIView {
     var attView: SliderView!
     var butts: [TypeButton] = []
     
+    var delegate: SegueHandler!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

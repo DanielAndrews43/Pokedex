@@ -38,15 +38,15 @@ class SoloPokemonSearchView: UIView {
         addSubview(nameSubview)
         
         let numberSubview: SingleSearchHorizontalView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: nameSubview.frame.maxY, width: frame.width, height: frame.height * soloHeight), text: "Number:", isName: false)
-        numberSubview.backgroundColor = UIColor.white
+        numberSubview.backgroundColor = UIColor.red
         number = numberSubview
         addSubview(numberSubview)
         
         let randomButtonSubview: UIView = UIView(frame: CGRect(x: 0, y: numberSubview.frame.maxY, width: frame.width, height: frame.height * luckyHeight))
         let randomButton: UIButton = UIButton.init(frame: CGRect(x: frame.width * 0.12, y: randomButtonSubview.frame.height * 0.4, width: frame.width * 0.76, height: randomButtonSubview.frame.height * 0.2))
-        randomButton.backgroundColor = UIColor.cyan
+        randomButton.backgroundColor = UIColor.red
         randomButton.addTarget(self, action: #selector(randomPokemon), for: .touchUpInside)
-        randomButton.setTitle("Get them randos", for: .normal)
+        randomButton.setTitle("Get Random Pokemon", for: .normal)
         randomButton.setTitleColor(UIColor.black, for: .normal)
         randomButtonSubview.addSubview(randomButton)
         addSubview(randomButtonSubview)
@@ -74,7 +74,10 @@ class SingleSearchHorizontalView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func setLayout(text: String, frame: CGRect, isName: Bool) {
+        
+
         
         let labelWidth: CGFloat = 0.3
         let boxWidth: CGFloat = 0.5
@@ -97,14 +100,16 @@ class SingleSearchHorizontalView: UIView {
             numberField = searchBar
         }
         searchBar.borderStyle = UITextBorderStyle.line
-        searchBar.backgroundColor = UIColor.purple
+        searchBar.backgroundColor = UIColor.white
         searchView.addSubview(searchBar)
         addSubview(searchView)
         
         //Add submit button
         let buttonView: UIView = UIView(frame: CGRect(x: searchView.frame.maxX, y: 0, width: frame.width * buttonWidth, height: frame.height))
         let submitButton: UIButton = UIButton.init(frame: CGRect(x: 0, y: buttonView.frame.height * 0.3, width: buttonView.frame.width * 0.8, height: buttonView.frame.height * 0.4))
-        submitButton.backgroundColor = UIColor.brown
+        submitButton.backgroundColor = UIColor.gray
+        submitButton.setTitle("Go", for: .normal)
+        submitButton.setTitleColor(UIColor.black, for: .normal)
         if isName {
             submitButton.addTarget(self, action: #selector(nameSearch), for: .touchUpInside)
         } else {
@@ -112,7 +117,6 @@ class SingleSearchHorizontalView: UIView {
         }
         buttonView.addSubview(submitButton)
         addSubview(buttonView)
-        
     }
     
     func nameSearch() {
@@ -125,12 +129,4 @@ class SingleSearchHorizontalView: UIView {
         NSLog("number clicked: " + numberField.text!)
     }
 }
-
-
-
-
-
-
-
-
 

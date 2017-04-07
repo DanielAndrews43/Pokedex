@@ -103,7 +103,7 @@ class TypeButton: UIView {
 
         let butt: UIButton = UIButton(frame: CGRect(x: 0, y:0, width: frame.width, height: frame.height))
         butt.addTarget(self, action: #selector(buttTapped), for: .touchUpInside)
-        butt.backgroundColor = UIColor.cyan
+        butt.backgroundColor = UIColor.red
         butt.setTitleColor(UIColor.black, for: .normal)
         butt.setTitle(self.title, for: .normal)
         butt.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -120,9 +120,9 @@ class TypeButton: UIView {
         NSLog("touched: " + self.title)
         
         if self.isSelected {
-            self.butt.backgroundColor = UIColor.green
+            self.butt.backgroundColor = UIColor.yellow
         } else {
-            self.butt.backgroundColor = UIColor.cyan
+            self.butt.backgroundColor = UIColor.red
         }
     }
 }

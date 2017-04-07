@@ -62,6 +62,8 @@ class Pokemon {
         if (data != nil) {
             return UIImage(data: data!)!
         }
-        return #imageLiteral(resourceName: "whosThatPokemon")
+        else {
+            return #imageLiteral(resourceName: "whosThatPokemon")
+        }
     }
 }

@@ -72,12 +72,12 @@ class SearchViewController: UIViewController, SegueHandler {
         view.addSubview(scView)
         
         soloSearchView = SoloPokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
-        soloSearchView?.backgroundColor = UIColor.blue
+        soloSearchView?.backgroundColor = UIColor.white
         soloSearchView.delegate = self
         view.addSubview(soloSearchView!)
         
         multipleSearchView = MultiplePokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
-        multipleSearchView?.backgroundColor = UIColor.yellow
+        multipleSearchView?.backgroundColor = UIColor.white
         multipleSearchView.delegate = self
     }
     

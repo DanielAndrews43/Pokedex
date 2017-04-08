@@ -37,8 +37,13 @@ class PokemonViewController: UIViewController {
         
         
         //Creates picture and fills it to be a square on the screen
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        imageView.frame = CGRect(x: 0, y: 0, width: imageView.frame.width, height: imageView.frame.width)
+        var height: CGFloat!
+        if let navTop = self.navigationController?.navigationBar.frame.maxY {
+            height = navTop
+        } else {
+            height = 0
+        }
+        let imageView = UIImageView(frame: CGRect(x: 0, y: height, width: view.frame.width, height: view.frame.width))
         imageView.image = pokemon.getImage()
         view.addSubview(imageView)
         

@@ -10,8 +10,8 @@ import UIKit
 
 class MultiplePokemonSearchView: UIView {
 
-    let slideHeight: CGFloat = 0.15
-    let searchHeight: CGFloat = 0.15
+    let slideHeight: CGFloat = 0.1
+    let searchHeight: CGFloat = 0.1
     let types: [String] = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Normal", "Fairy", "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
     
     var defView: SliderView!
@@ -47,7 +47,7 @@ class MultiplePokemonSearchView: UIView {
         
         var xCoord: CGFloat = 0
         var yCoord: CGFloat = attView.frame.maxY
-        let buttHeight = (frame.height - slideHeight * 3 * frame.height - searchHeight * frame.height) / 3
+        let buttHeight = (frame.height - slideHeight * 3 * frame.height - searchHeight * frame.height) / 4
         
         for i in 0...2 {
             xCoord = 0
@@ -63,7 +63,7 @@ class MultiplePokemonSearchView: UIView {
         }
         
         let searchView: UIView = UIView(frame: CGRect(x: 0, y: yCoord, width: frame.width, height: frame.height * searchHeight))
-        let searchButton: UIButton = UIButton(frame: CGRect(x: searchView.frame.width / 3, y: searchView.frame.height / 3, width: searchView.frame.width / 3, height: searchView.frame.height / 3))
+        let searchButton: UIButton = UIButton(frame: CGRect(x: searchView.frame.width / 3, y: searchView.frame.height / 3, width: searchView.frame.width / 3, height: searchView.frame.height / 2))
         searchButton.addTarget(self, action: #selector(search), for: .touchUpInside)
         searchButton.backgroundColor = UIColor.lightGray
         searchButton.setTitleColor(UIColor.black, for: .normal)
@@ -88,6 +88,8 @@ class MultiplePokemonSearchView: UIView {
         for type in types {
             NSLog(type)
         }
+        
+        delegate.segueToNext(identifier: "searchToResults")
     }
 }
 

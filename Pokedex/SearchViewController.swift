@@ -12,7 +12,7 @@ protocol SegueHandler: class {
 }
 
 class SearchViewController: UIViewController, SegueHandler {
-    let titleViewHeight: CGFloat = 0.15
+    let titleViewHeight: CGFloat = 0.1
     let scHeight: CGFloat = 0.05
     
     var soloSearchView: SoloPokemonSearchView!
@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, SegueHandler {
     }
     
     func segueToNext(identifier: String) {
-        performSegue(withIdentifier: "searchToResults", sender: self)
+        performSegue(withIdentifier: identifier, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,6 +74,8 @@ class SearchViewController: UIViewController, SegueHandler {
         soloSearchView = SoloPokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
         soloSearchView?.backgroundColor = UIColor.white
         soloSearchView.delegate = self
+        soloSearchView.name.delegate = self
+        soloSearchView.number.delegate = self
         view.addSubview(soloSearchView!)
         
         multipleSearchView = MultiplePokemonSearchView(frame: CGRect(x: 0, y: scView.frame.maxY, width: view.frame.width, height: view.frame.height * (1 - scHeight - titleViewHeight)))
@@ -98,7 +100,7 @@ class SearchViewController: UIViewController, SegueHandler {
     
     // Title Bar View
     func setUpTitleView(height: CGFloat) -> UIView {
-        let newView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * height))
+        let newView: UIView = UIView(frame: CGRect(x: 0, y: (self.navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height * height))
         
         
         //For aesthetic purposes, fix at the end

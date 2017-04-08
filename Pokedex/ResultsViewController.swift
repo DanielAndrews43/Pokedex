@@ -64,7 +64,7 @@ class ResultsViewController: UIViewController {
         setupCollectionView()
         setupTableView()
         
-        let scView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * scHeight))
+        let scView: UIView = UIView(frame: CGRect(x: 0, y: (self.navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height * scHeight))
         let segments = ["Grid", "List"]
         let sc = UISegmentedControl(items: segments)
         sc.frame = CGRect(x: ((view.frame.width - sc.frame.width) / 2), y: ((scView.frame.height - sc.frame.height) / 2), width: sc.frame.width, height: sc.frame.height)
@@ -90,7 +90,7 @@ class ResultsViewController: UIViewController {
     
     func setupTableView(){
         //Initialize TableView Object here
-        tableView = UITableView(frame: CGRect(x: 0, y: scHeight * view.frame.height, width: view.frame.width, height: view.frame.height))
+        tableView = UITableView(frame: CGRect(x: 0, y: (self.navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height))
         //Register the tableViewCell you are using
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "nameCell")
         
@@ -107,7 +107,7 @@ class ResultsViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: CGRect(x:0, y: scHeight*view.frame.height, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x:0, y: (self.navigationController?.navigationBar.frame.maxY)!, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "pokemonCell")
         collectionView.backgroundColor = UIColor.white
         collectionView.delegate = self
@@ -139,8 +139,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate{
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("clicked a row. needs more work")
-        performSegue(withIdentifier: "segueToPokemonVC", sender: self)
+        performSegue(withIdentifier: "resultsToPokemon", sender: self)
     }
 }
 

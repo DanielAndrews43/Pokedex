@@ -39,6 +39,7 @@ class SoloPokemonSearchView: UIView {
         
         let numberSubview: SingleSearchHorizontalView = SingleSearchHorizontalView(frame: CGRect(x: 0, y: nameSubview.frame.maxY, width: frame.width, height: frame.height * soloHeight), text: "Number:", isName: false)
         numberSubview.backgroundColor = UIColor.red
+        numberSubview.delegate = self.delegate
         number = numberSubview
         addSubview(numberSubview)
         
@@ -60,7 +61,7 @@ class SoloPokemonSearchView: UIView {
 }
 
 class SingleSearchHorizontalView: UIView {
-    
+    var delegate: SegueHandler!
     var nameField: UITextField!
     var numberField: UITextField!
     
@@ -76,8 +77,6 @@ class SingleSearchHorizontalView: UIView {
     
     
     func setLayout(text: String, frame: CGRect, isName: Bool) {
-        
-
         
         let labelWidth: CGFloat = 0.3
         let boxWidth: CGFloat = 0.5
@@ -121,12 +120,12 @@ class SingleSearchHorizontalView: UIView {
     
     func nameSearch() {
         //Call on name search
-        NSLog("name clicked: " + nameField.text!)
-        
+        self.delegate.segueToNext(identifier: "searchToResults")
     }
     
     func numberSearch() {
         NSLog("number clicked: " + numberField.text!)
+        self.delegate.segueToNext(identifier: "searchToResults")
     }
 }
 
